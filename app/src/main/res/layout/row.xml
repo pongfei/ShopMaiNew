@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Title of the message -->
+    <TextView
+        android:id="@+id/messageTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
+        android:text="Title"
+        android:textColor="#000"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <!-- First string (img1 as a string) -->
+    <TextView
+        android:id="@+id/messageImg1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
+        android:text="Image 1 URL"
+        android:textColor="#555"
+        android:textSize="14sp" />
+
+    <!-- Second string (img2 as a string) -->
+    <TextView
+        android:id="@+id/messageImg2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
+        android:text="Image 2 URL"
+        android:textColor="#555"
+        android:textSize="14sp" />
+
+    <!-- Price -->
+    <TextView
+        android:id="@+id/messagePrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
+        android:text="Price: $0.00"
+        android:textColor="#000"
+        android:textSize="16sp" />
+
+    <!-- Description -->
+    <TextView
+        android:id="@+id/messageDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
+        android:text="Description"
+        android:textColor="#666"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/orderBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Order" />
+</LinearLayout>
