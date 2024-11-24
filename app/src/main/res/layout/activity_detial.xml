@@ -42,7 +42,7 @@
         app:srcCompat="@drawable/black_forest_cake_2" />
 
     <TextView
-        android:id="@+id/infoPrice"
+        android:id="@+id/priceInfo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -65,10 +65,10 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/infoPrice" />
+        app:layout_constraintTop_toBottomOf="@+id/priceInfo" />
 
     <TextView
-        android:id="@+id/infoDesc"
+        android:id="@+id/descInfo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -90,6 +90,6 @@
         android:text="Add to Cart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/infoDesc" />
+        app:layout_constraintTop_toBottomOf="@+id/descInfo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
