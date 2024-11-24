@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun sort(view: View) {
-
+        // sorting
         val checkedItem = intArrayOf(-1)
         val alertDialog = AlertDialog.Builder(this)
         alertDialog.setIcon(R.drawable.sort)
