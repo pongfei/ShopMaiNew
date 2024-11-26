@@ -29,7 +29,7 @@ class OrderAdapter(
         // Resolve image resource
         val imgName = order.img1
         val context = holder.imgView.context
-        val resId = imgName?.let { context.resources.getIdentifier(it, "drawable", context.packageName) } ?: 0
+        val resId = imgName.let { context.resources.getIdentifier(it, "drawable", context.packageName) } ?: 0
         if (resId != 0) {
             holder.imgView.setImageResource(resId)
         } else {
@@ -55,9 +55,4 @@ class OrderAdapter(
         }
     }
 
-    fun updateOrders(newOrders: List<Order>) {
-        orderObject.clear()
-        orderObject.addAll(newOrders)
-        notifyDataSetChanged()
-    }
 }
