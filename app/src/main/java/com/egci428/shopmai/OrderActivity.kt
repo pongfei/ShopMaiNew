@@ -183,6 +183,8 @@ class OrderActivity :  AppCompatActivity(), OrderAdapter.OnItemClickListener, Se
             orderList.removeAt(position)
             adapter.notifyItemRemoved(position)
             update()
+            finish()
+            startActivity(intent)
         }
     }
 }
