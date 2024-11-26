@@ -8,12 +8,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.egci428.shopmai.Model.Order
+import com.egci428.shopmai.OrderActivity
 import com.egci428.shopmai.R
 
 class OrderAdapter(
     private val orderObject: ArrayList<Order>,
     private val listener: OnItemClickListener,
-    private val sensorManager: SensorManager
+    private val sensorManager: SensorManager,
+    private var total: Int = 0
 ) : RecyclerView.Adapter<OrderAdapter.OrderViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrderViewHolder {
@@ -27,6 +29,8 @@ class OrderAdapter(
         val order = orderObject[position]
         holder.txtTitle.text = order.title
         holder.txtPrice.text = "฿ "+ order.price.toString()
+        total+= order.price.toInt()
+        (holder.itemView.context as OrderActivity).totalText.text = "Total: ฿ $total"
 
         // Resolve image resource
         val imgName = order.img1

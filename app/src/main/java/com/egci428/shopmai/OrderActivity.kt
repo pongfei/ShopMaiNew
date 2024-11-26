@@ -57,7 +57,7 @@ class OrderActivity :  AppCompatActivity(), OrderAdapter.OnItemClickListener, Se
         val homeBtn = findViewById<Button>(R.id.homeBtn)
         val checkBtn = findViewById<Button>(R.id.checkBtn)
         totalText = findViewById(R.id.totalTextView)
-//
+
 //        try{
 //            val fOut = openFileOutput(file, Context.MODE_APPEND)
 //            val writer = OutputStreamWriter(fOut)
@@ -79,7 +79,6 @@ class OrderActivity :  AppCompatActivity(), OrderAdapter.OnItemClickListener, Se
             startActivity(intent)
             finish()
         }
-
     }
 
     override fun onSensorChanged(event: SensorEvent) {
@@ -88,9 +87,7 @@ class OrderActivity :  AppCompatActivity(), OrderAdapter.OnItemClickListener, Se
         }
     }
 
-    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
-
-    }
+    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) { }
 
     @SuppressLint("SetTextI18n")
     private fun getAccelerometer(event: SensorEvent) {
@@ -111,6 +108,7 @@ class OrderActivity :  AppCompatActivity(), OrderAdapter.OnItemClickListener, Se
             emptyCart()
             read()
             Toast.makeText(this, "empty cart", Toast.LENGTH_SHORT).show()
+            finish()
         }
     }
 
