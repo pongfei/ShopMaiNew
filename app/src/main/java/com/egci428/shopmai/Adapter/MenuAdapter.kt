@@ -32,7 +32,7 @@ class MenuAdapter(
         val img1TextView = view.findViewById<TextView>(R.id.messageImg1)
         val img2TextView = view.findViewById<TextView>(R.id.messageImg2)
         val priceTextView = view.findViewById<TextView>(R.id.messagePrice)
-        val descriptionTextView = view.findViewById<TextView>(R.id.messageDescription)
+//        val descriptionTextView = view.findViewById<TextView>(R.id.messageDescription)
         val orderBtn = view.findViewById<Button>(R.id.orderBtn)
 
         // Set values from the message object
@@ -41,7 +41,7 @@ class MenuAdapter(
         img1TextView.text = "Image 1 URL: ${menu.img1}"
         img2TextView.text = "Image 2 URL: ${menu.img2}"
         priceTextView.text = "Price: $${menu.price}"
-        descriptionTextView.text = menu.description
+        val descriptionTextView = menu.description
 
         // Handle button click
         orderBtn.setOnClickListener {
@@ -50,7 +50,7 @@ class MenuAdapter(
             intent.putExtra("titleTextView", titleTextView.text.toString())
 //            intent.putExtra("img1TextView", TextView.text.toString())
             intent.putExtra("priceTextView", priceTextView.text.toString())
-            intent.putExtra("descriptionTextView", descriptionTextView.text.toString())
+            intent.putExtra("descriptionTextView", descriptionTextView.toString())
 
             mContext.startActivity(intent) //use mContext when in adapter class
 
