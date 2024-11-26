@@ -3,6 +3,7 @@ package com.egci428.shopmai
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.EditText
 import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -17,6 +18,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var msgList: MutableList<Menu>
     private lateinit var adapter: MenuAdapter
     private lateinit var dataReference: FirebaseFirestore
+    private lateinit var searchEditText: EditText
+    private lateinit var currentList: MutableList<Menu>
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,9 +29,33 @@ class MainActivity : AppCompatActivity() {
         listView = findViewById(R.id.menuList)
         msgList = mutableListOf()
         dataReference = FirebaseFirestore.getInstance()
+        searchEditText = findViewById(R.id.searchEditText)
 
         readFirestoreData()
     }
+
+//    private fun readFirestoreData() {
+//        val db = dataReference.collection("menu")
+//        db.orderBy("id").get()
+//            .addOnSuccessListener { snapshot ->
+//                if (snapshot != null) {
+//                    msgList.clear()
+//                    val messages = snapshot.toObjects(Menu::class.java)
+//                    msgList.addAll(messages)
+//
+//                    // Set up adapter
+//                    adapter = MenuAdapter(this, R.layout.row, msgList)
+//                    listView.adapter = adapter
+//                }
+//            }
+//            .addOnFailureListener {
+//                Toast.makeText(
+//                    applicationContext,
+//                    "Failed to read message from Firestore!",
+//                    Toast.LENGTH_SHORT
+//                ).show()
+//            }
+//    }
 
     private fun readFirestoreData() {
         val db = dataReference.collection("menu")
@@ -39,8 +66,9 @@ class MainActivity : AppCompatActivity() {
                     val messages = snapshot.toObjects(Menu::class.java)
                     msgList.addAll(messages)
 
-                    // Set up adapter
-                    adapter = MenuAdapter(this, R.layout.row, msgList)
+                    // Set up adapter and initialize currentList
+                    currentList = msgList.toMutableList()
+                    adapter = MenuAdapter(this, R.layout.row, currentList)
                     listView.adapter = adapter
                 }
             }
@@ -60,12 +88,24 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun search(view:View){
-        Toast.makeText(this, "Search clicked!", Toast.LENGTH_SHORT).show()
+    fun search(view: View) {
+        //.trim() ignores the spaces/tab
+        val query = searchEditText.text.toString().trim()
+        if (query.isNotEmpty()) {
+            currentList = msgList.filter { menu ->
+                menu.title.contains(query, ignoreCase = true)
+            }.toMutableList()
+        } else {
+            currentList = msgList.toMutableList() // Reset to full list
+            Toast.makeText(this, "Showing all items.", Toast.LENGTH_SHORT).show()
+        }
+
+        // Update adapter with the current list
+        adapter = MenuAdapter(this, R.layout.row, currentList)
+        listView.adapter = adapter
     }
 
     fun sort(view: View) {
-        // sorting
         val checkedItem = intArrayOf(-1)
         val alertDialog = AlertDialog.Builder(this)
         alertDialog.setIcon(R.drawable.sort)
@@ -75,13 +115,15 @@ class MainActivity : AppCompatActivity() {
         alertDialog.setSingleChoiceItems(listItems, checkedItem[0]) { dialog, which ->
             checkedItem[0] = which
             when (which) {
-                0 -> { msgList.sortByDescending { it.price } }
-                1 -> { msgList.sortBy { it.price } }
+                0 -> currentList.sortByDescending { it.price }
+                1 -> currentList.sortBy { it.price }
             }
+
+            // Notify adapter of changes
             adapter.notifyDataSetChanged()
             dialog.dismiss()
         }
-        alertDialog.setNegativeButton("Cancel") { dialog, which -> } // Do nothing on cancel
+        alertDialog.setNegativeButton("Cancel") { dialog, _ -> dialog.dismiss() }
         val customAlertDialog = alertDialog.create()
         customAlertDialog.show()
     }
