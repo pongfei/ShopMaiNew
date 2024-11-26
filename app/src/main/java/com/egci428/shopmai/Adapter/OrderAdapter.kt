@@ -9,45 +9,55 @@ import androidx.recyclerview.widget.RecyclerView
 import com.egci428.shopmai.Model.Order
 import com.egci428.shopmai.R
 
-class OrderAdapter(private val orderObject: MutableList<Order>, private val listener: OnItemClickListener):RecyclerView.Adapter<OrderAdapter.OrderViewHolder>() {
+class OrderAdapter(
+    private val orderObject: ArrayList<Order>,
+    private val listener: OnItemClickListener
+) : RecyclerView.Adapter<OrderAdapter.OrderViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrderViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.row,parent,false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.cart_row, parent, false)
         return OrderViewHolder(itemView)
     }
 
-    override fun getItemCount(): Int {
-        return orderObject.size
-    }
+    override fun getItemCount(): Int = orderObject.size
 
-    override fun onBindViewHolder(holder: OrderViewHolder, position: Int)
-    {
+    override fun onBindViewHolder(holder: OrderViewHolder, position: Int) {
+        val order = orderObject[position]
+        holder.txtTitle.text = order.title
+        holder.txtPrice.text = order.price.toString()
 
-//        holder.txtTitle.text = orderObject[position].title
-//        holder.txtPrice.text = orderObject[position].price.toString()
-//        holder.imgView.setImageResource(orderObject[position].img1)
-//        val Img = "R.drawable" + orderObject[position].img1
-//        holder.imgView.setImage(Img)
+        // Resolve image resource
+        val imgName = order.img1
+        val context = holder.imgView.context
+        val resId = imgName?.let { context.resources.getIdentifier(it, "drawable", context.packageName) } ?: 0
+        if (resId != 0) {
+            holder.imgView.setImageResource(resId)
+        } else {
+            holder.imgView.setImageResource(R.drawable.ic_launcher_foreground)
+        }
     }
 
     interface OnItemClickListener {
         fun onItemClick(position: Int)
     }
 
-    inner class OrderViewHolder(itemView: View):RecyclerView.ViewHolder(itemView) {
-//        var txtTitle = itemView.findViewById<TextView>(R.id.itemTitle)
-//        var txtPrice = itemView.findViewById<TextView>(R.id.itemPrice)
-//        var imgView = itemView.findViewById<ImageView>(R.id.imgView)
+    inner class OrderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val txtTitle: TextView = itemView.findViewById(R.id.itemTitle)
+        val txtPrice: TextView = itemView.findViewById(R.id.itemPrice)
+        val imgView: ImageView = itemView.findViewById(R.id.imgView)
 
         init {
-            // Set the click listener for the entire item view
             itemView.setOnClickListener {
-                val position = adapterPosition
-                if (position != RecyclerView.NO_POSITION) {
-                    listener.onItemClick(position)
+                if (adapterPosition != RecyclerView.NO_POSITION) {
+                    listener.onItemClick(adapterPosition)
                 }
             }
         }
     }
-}
 
+    fun updateOrders(newOrders: List<Order>) {
+        orderObject.clear()
+        orderObject.addAll(newOrders)
+        notifyDataSetChanged()
+    }
+}

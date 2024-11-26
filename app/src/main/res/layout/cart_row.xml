@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="1dp">
+
+    <!-- Container for image with centered label -->
+    <FrameLayout
+        android:layout_width="100dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp">
+
+        <!-- Cookie ImageView -->
+        <ImageView
+            android:id="@+id/imgView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/black"
+            android:src="@drawable/cinnamon_roll_2" />
+
+        <!-- Label TextView slightly off-center inside the ImageView -->
+        <!-- Adjust this value as needed -->
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <!-- Fortune Cookie Message TextView -->
+        <TextView
+            android:id="@+id/itemTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="4dp"
+            android:text="Title"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <!-- Timestamp TextView -->
+        <TextView
+            android:id="@+id/itemPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:paddingEnd="16dp"
+            android:text="Price"
+            android:textColor="#FFB6C1"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+</LinearLayout>
+

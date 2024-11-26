@@ -1,5 +1,6 @@
 package com.egci428.shopmai
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ListView
@@ -55,6 +56,8 @@ class MainActivity : AppCompatActivity() {
     // (view:View) is used when interacting with UI components without binding
     fun toCart(view: View) {
         Toast.makeText(this, "to cart!", Toast.LENGTH_SHORT).show()
+        intent = Intent(this, OrderActivity::class.java)
+        startActivity(intent)
     }
 
     fun search(view:View){
