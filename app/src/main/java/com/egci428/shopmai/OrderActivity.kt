@@ -1,7 +1,10 @@
 package com.egci428.shopmai
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.hardware.Sensor
+import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Bundle
@@ -22,15 +25,16 @@ import java.io.InputStreamReader
 import java.io.OutputStreamWriter
 import com.google.gson.Gson
 
-class OrderActivity :  AppCompatActivity(), OrderAdapter.OnItemClickListener {
+class OrderActivity :  AppCompatActivity(), OrderAdapter.OnItemClickListener, SensorEventListener {
     lateinit var recyclerView: RecyclerView
     lateinit var adapter: OrderAdapter
     private val orderList = ArrayList<Order>()
 
     private val file = "order.txt"
 
-    //    private var sensorManager : SensorManager? = null //sensor
-//    private var lastUpdate: Long = 0 //sensor
+    private var sensorManager : SensorManager? = null //sensor
+    private var lastUpdate: Long = 0 //sensor
+
     lateinit var totalText: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,34 +46,20 @@ class OrderActivity :  AppCompatActivity(), OrderAdapter.OnItemClickListener {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
+        lastUpdate = System.currentTimeMillis()
+
         recyclerView = findViewById(R.id.RecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        adapter = OrderAdapter(orderList, this)
+        adapter = OrderAdapter(orderList, this, sensorManager!!)
         recyclerView.adapter = adapter
-
-////////////sending data across pages
-        val bundle = intent.extras
-        var title = "" //assign string value
-        var img1 = ""
-        var price = 0
-
-        if(bundle != null) //check if can receive data from previous page
-        {
-            title = bundle.getString("title").toString()
-            img1 = bundle.getString("img1").toString()
-            price = bundle.getInt("price")
-
-            if (title.isNotBlank()) {
-                val order = Order(title,img1,price)
-                orderList.add(order)
-                adapter.notifyItemInserted(orderList.size - 1)
-            }
-        }
         
         val homeBtn = findViewById<Button>(R.id.homeBtn)
         val checkBtn = findViewById<Button>(R.id.checkBtn)
         totalText = findViewById(R.id.totalTextView)
+
+//        read()
 
         homeBtn.setOnClickListener() {
             val intent = Intent(this, MainActivity::class.java)
@@ -78,24 +68,52 @@ class OrderActivity :  AppCompatActivity(), OrderAdapter.OnItemClickListener {
         checkBtn.setOnClickListener() {
             Toast.makeText(this, "Order submitted!", Toast.LENGTH_SHORT).show()
 //            val intent = Intent(this, ReviewActivity::class.java)
-//            intent.putExtras("itemname","chocolate cake")
 //            startActivity(intent)
 //            finish()
         }
+
     }
-    ///put in item detail
-    private fun save(order: Order){
-        try{
-            val json = Gson().toJson(order)
-            val fOut = openFileOutput(file, Context.MODE_APPEND)
-            val writer = OutputStreamWriter(fOut)
-            writer.write(json + "\n")
-            writer.close()
-            adapter.notifyDataSetChanged()
-        } catch (e: Exception) {
-            e.printStackTrace()
+
+    override fun onSensorChanged(event: SensorEvent) {
+        if (event.sensor.type == Sensor.TYPE_ACCELEROMETER) {
+            getAccelerometer(event)
         }
     }
+
+    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
+
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun getAccelerometer(event: SensorEvent) {
+        val values = event.values
+        val x = values[0]
+        val y = values[1]
+        val z = values[2]
+
+        val accel = (x * x + y * y + z * z) / (SensorManager.GRAVITY_EARTH * SensorManager.GRAVITY_EARTH)
+
+        val actualTime = System.currentTimeMillis()
+        if (accel >= 2) {
+            if (actualTime - lastUpdate < 200) {
+                return //exit from function
+            }
+            lastUpdate = actualTime
+            orderList.clear()
+            Toast.makeText(this, "empty cart", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        sensorManager!!.unregisterListener(this)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        sensorManager!!.registerListener(this, sensorManager!!.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL)
+    }
+    ///end sensor
 
     private fun read() {
         try {
@@ -134,7 +152,6 @@ class OrderActivity :  AppCompatActivity(), OrderAdapter.OnItemClickListener {
                     writer.write(gson.toJson(order) + "\n")
                 }
             }
-
             writer.close()
         } catch (e: Exception) {
             e.printStackTrace()

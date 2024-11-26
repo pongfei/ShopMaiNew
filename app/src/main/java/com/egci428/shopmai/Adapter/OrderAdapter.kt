@@ -1,5 +1,6 @@
 package com.egci428.shopmai.Adapter
 
+import android.hardware.SensorManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +12,8 @@ import com.egci428.shopmai.R
 
 class OrderAdapter(
     private val orderObject: ArrayList<Order>,
-    private val listener: OnItemClickListener
+    private val listener: OnItemClickListener,
+    private val sensorManager: SensorManager
 ) : RecyclerView.Adapter<OrderAdapter.OrderViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrderViewHolder {
