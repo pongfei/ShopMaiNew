@@ -19,7 +19,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.egci428.shopmai.Adapter.OrderAdapter
 import com.egci428.shopmai.Model.Order
-import com.google.firebase.firestore.FirebaseFirestore
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.io.OutputStreamWriter
@@ -58,8 +57,17 @@ class OrderActivity :  AppCompatActivity(), OrderAdapter.OnItemClickListener, Se
         val homeBtn = findViewById<Button>(R.id.homeBtn)
         val checkBtn = findViewById<Button>(R.id.checkBtn)
         totalText = findViewById(R.id.totalTextView)
+//
+//        try{
+//            val fOut = openFileOutput(file, Context.MODE_APPEND)
+//            val writer = OutputStreamWriter(fOut)
+//            writer.write("{\"title\": \"Chocolate Cake\", \"price\": \"60.00\", \"img1\": \"chocolate_cake_1\"}" + "\n")
+//            writer.close()
+//            adapter.notifyDataSetChanged() } catch (e: Exception) {
+//            e.printStackTrace()
+//        }
 
-//        read()
+        read()
 
         homeBtn.setOnClickListener() {
             val intent = Intent(this, MainActivity::class.java)
@@ -67,9 +75,9 @@ class OrderActivity :  AppCompatActivity(), OrderAdapter.OnItemClickListener, Se
         }
         checkBtn.setOnClickListener() {
             Toast.makeText(this, "Order submitted!", Toast.LENGTH_SHORT).show()
-//            val intent = Intent(this, ReviewActivity::class.java)
-//            startActivity(intent)
-//            finish()
+            val intent = Intent(this, ReviewActivity::class.java)
+            startActivity(intent)
+            finish()
         }
 
     }
@@ -100,6 +108,8 @@ class OrderActivity :  AppCompatActivity(), OrderAdapter.OnItemClickListener, Se
             }
             lastUpdate = actualTime
             orderList.clear()
+            emptyCart()
+            read()
             Toast.makeText(this, "empty cart", Toast.LENGTH_SHORT).show()
         }
     }
@@ -114,6 +124,17 @@ class OrderActivity :  AppCompatActivity(), OrderAdapter.OnItemClickListener, Se
         sensorManager!!.registerListener(this, sensorManager!!.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL)
     }
     ///end sensor
+    private fun emptyCart(){
+        try{
+            val fOut = openFileOutput(file, Context.MODE_PRIVATE)
+            val writer = OutputStreamWriter(fOut)
+            writer.write("")
+            writer.close()
+            adapter.notifyDataSetChanged()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
 
     private fun read() {
         try {
