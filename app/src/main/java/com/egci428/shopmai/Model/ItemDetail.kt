@@ -9,7 +9,6 @@ import com.egci428.shopmai.Adapter.ReviewDetailAdapter
 import com.egci428.shopmai.R
 import com.google.firebase.firestore.FirebaseFirestore
 import android.util.Log
-import android.widget.RatingBar
 
 class ItemDetail : AppCompatActivity() {
 
@@ -17,6 +16,7 @@ class ItemDetail : AppCompatActivity() {
     private lateinit var msgList: MutableList<ReviewDetail>
     private lateinit var adapter: ReviewDetailAdapter
     private lateinit var dataReference: FirebaseFirestore
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
