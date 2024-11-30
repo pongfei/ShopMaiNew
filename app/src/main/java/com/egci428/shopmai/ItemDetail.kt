@@ -52,15 +52,17 @@ class ItemDetail : AppCompatActivity() {
             price.text = "Price: ฿" + bundle.getString("priceTextView")
             desc.text = bundle.getString("descriptionTextView")
             imgUrl1 = bundle.getString("img1TextView")
-//            imgUrl2 = bundle.getString("img2TextView")
+            imgUrl2 = bundle.getString("img2TextView")
             imgUrl = imgUrl1
         }
         readFirestoreData()
-//        backImgBtn.setOnClickListener{
-//            if(imgUrl==imgUrl1) imgUrl = imgUrl2
-//            else imgUrl = imgUrl1
-//            showImg()
-//        }
+
+        backImgBtn.setOnClickListener{
+            if(imgUrl==imgUrl1 && imgUrl != null)
+                imgUrl = imgUrl2
+            else imgUrl = imgUrl1
+            showImg()
+        }
         showImg()
 
         orderBtn.setOnClickListener{
@@ -68,6 +70,7 @@ class ItemDetail : AppCompatActivity() {
             val Title = title.text.toString()
             val Img1 = imgUrl1.toString()
             val Price = intent.getFloatExtra("priceTextView",0f)
+//            val Price = intent.getFloatExtra("price",0F)
             val line = "{\"id\": $id, \"title\": \"$Title\", \"price\": $Price, \"img1\": \"$Img1\"}"
             save(line)
             finish()

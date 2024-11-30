@@ -28,8 +28,10 @@ class OrderAdapter(
     override fun onBindViewHolder(holder: OrderViewHolder, position: Int) {
         val order = orderObject[position]
         holder.txtTitle.text = order.title
-        holder.txtPrice.text = "฿ "+ order.price.toString()
+//        holder.txtPrice.text = "฿ "+ order.price.toString()
+        holder.txtPrice.text = "฿ ${ order.price}"
         total+= order.price
+
         (holder.itemView.context as OrderActivity).totalText.text = "Total: ฿ $total"
 
         // Resolve image resource
