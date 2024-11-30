@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="#00FFFFFF"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:background="@android:color/white">
+    android:padding="16dp">
 
     <!-- Username -->
     <TextView
         android:id="@+id/reviewUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingBottom="4dp"
         android:text="Username"
-        android:textSize="16sp"
-        android:textStyle="bold"
         android:textColor="@android:color/black"
-        android:paddingBottom="4dp" />
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
     <!-- Review Date -->
+
     <TextView
         android:id="@+id/reviewDate"
         android:layout_width="180dp"
@@ -29,26 +29,27 @@
         android:textSize="12sp" />
 
     <!-- Review Text -->
-    <TextView
-        android:id="@+id/reviewText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="This is a review text"
-        android:textSize="14sp"
-        android:textColor="@android:color/black"
-        android:background="@android:color/transparent"
-        android:padding="8dp"
-        android:layout_marginBottom="8dp" />
-
-    <!-- Rating Bar -->
     <RatingBar
         android:id="@+id/ratingBar"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_gravity="start"
         android:layout_marginTop="8dp"
         android:isIndicator="true"
         android:max="5"
-        android:stepSize="0.5" />
+        android:stepSize="1" />
+
+    <TextView
+        android:id="@+id/reviewText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:background="@android:color/transparent"
+        android:padding="8dp"
+        android:text="This is a review text"
+        android:textColor="@android:color/black"
+        android:textSize="14sp" />
+
+    <!-- Rating Bar -->
 
 </LinearLayout>

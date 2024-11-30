@@ -32,7 +32,7 @@
             android:name=".ReviewActivity"
             android:exported="false" />
         <activity
-            android:name=".Model.ItemDetail"
+            android:name=".ItemDetail"
             android:exported="false" />
         <activity
             android:name=".OrderActivity"

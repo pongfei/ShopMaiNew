@@ -17,7 +17,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.egci428.shopmai.Model.Review
+import com.egci428.shopmai.Model.ReviewDetail
 import com.google.firebase.firestore.FirebaseFirestore
 import java.io.File
 import java.util.Locale
@@ -45,6 +45,8 @@ class ReviewActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        dataReference = FirebaseFirestore.getInstance()
+
         itemName = findViewById(R.id.itemName)
         nameEditText = findViewById(R.id.nameEditText)
         reviewImage = findViewById(R.id.reviewImage)
@@ -55,19 +57,20 @@ class ReviewActivity : AppCompatActivity() {
         itemName.text = intent.getStringExtra("itemname")
 
         submitBtn.setOnClickListener {
-            val name = nameEditText.text.toString()
-            val comment = commentEditText.text.toString()
+            val user = nameEditText.text.toString()
+            val review = commentEditText.text.toString()
             val rating = ratingEditText.text.toString().toInt()
             val img = reviewImage.toString()
             val item = itemName.text.toString()
-            submitData(item,name,img,rating,comment)
+            val id = intent.getIntExtra("id",0)
+
+            submitData(id, item,user,img,rating,review)
         }
     }
-    private fun submitData(item: String, name: String, img: String, rating:Int, comment: String) {
-        val db = dataReference.collection("reviews")
-        val messageId = db.document().id
+    private fun submitData(id: Int, item: String, user: String, img: String, rating:Int, review: String) {
+        val db = dataReference.collection("review")
         val date = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(System.currentTimeMillis())
-        val reviewData = Review(messageId, item, name, date, img, rating,comment)
+        val reviewData = ReviewDetail(id,date, item, rating, review, user, img)
 
         db.add(reviewData)
             .addOnSuccessListener {
@@ -77,6 +80,7 @@ class ReviewActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext, "Fail to save message", Toast.LENGTH_SHORT).show()
             }
         Log.d("test add", reviewData.toString())
+        finish()
     }
 
     fun takePhoto(view: View) {

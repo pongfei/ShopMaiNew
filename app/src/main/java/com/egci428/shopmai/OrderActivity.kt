@@ -58,15 +58,6 @@ class OrderActivity :  AppCompatActivity(), OrderAdapter.OnItemClickListener, Se
         val checkBtn = findViewById<Button>(R.id.checkBtn)
         totalText = findViewById(R.id.totalTextView)
 
-//        try{
-//            val fOut = openFileOutput(file, Context.MODE_APPEND)
-//            val writer = OutputStreamWriter(fOut)
-//            writer.write("{\"title\": \"Chocolate Cake\", \"price\": \"60.00\", \"img1\": \"chocolate_cake_1\"}" + "\n")
-//            writer.close()
-//            adapter.notifyDataSetChanged() } catch (e: Exception) {
-//            e.printStackTrace()
-//        }
-
         read()
 
         homeBtn.setOnClickListener() {
@@ -75,8 +66,10 @@ class OrderActivity :  AppCompatActivity(), OrderAdapter.OnItemClickListener, Se
         }
         checkBtn.setOnClickListener() {
             Toast.makeText(this, "Order submitted!", Toast.LENGTH_SHORT).show()
+            emptyCart()
             val intent = Intent(this, ReviewActivity::class.java)
             intent.putExtra("itemname", orderList.get(0).title)
+            intent.putExtra("id",orderList.get(0).id)
             startActivity(intent)
             finish()
         }
