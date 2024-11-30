@@ -1,6 +1,7 @@
 package com.egci428.shopmai.Model
 
 data class Review (
+    val messageId: String,
     val item: String,
     val userName: String,
     val date: String,

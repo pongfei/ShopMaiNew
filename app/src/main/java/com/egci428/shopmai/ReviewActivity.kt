@@ -64,10 +64,10 @@ class ReviewActivity : AppCompatActivity() {
         }
     }
     private fun submitData(item: String, name: String, img: String, rating:Int, comment: String) {
-        var db = dataReference.collection("review")
+        val db = dataReference.collection("reviews")
         val messageId = db.document().id
         val date = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(System.currentTimeMillis())
-        val reviewData = Review(item, name, date, img, rating,comment)
+        val reviewData = Review(messageId, item, name, date, img, rating,comment)
 
         db.add(reviewData)
             .addOnSuccessListener {
