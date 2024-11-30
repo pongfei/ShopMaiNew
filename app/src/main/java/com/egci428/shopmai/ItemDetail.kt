@@ -45,6 +45,7 @@ class ItemDetail : AppCompatActivity() {
         val orderBtn = findViewById<Button>(R.id.orderBtn)
         imgInfo = findViewById<ImageView>(R.id.imgInfo)
         val backImgBtn = findViewById<ImageView>(R.id.backImgBtn)
+        val backImgBtn2 = findViewById<ImageView>(R.id.backImgBtn2)
 
         val bundle = intent.extras
         if (bundle != null) {
@@ -58,6 +59,12 @@ class ItemDetail : AppCompatActivity() {
         readFirestoreData()
 
         backImgBtn.setOnClickListener{
+            if(imgUrl==imgUrl1 && imgUrl != null)
+                imgUrl = imgUrl2
+            else imgUrl = imgUrl1
+            showImg()
+        }
+        backImgBtn2.setOnClickListener{
             if(imgUrl==imgUrl1 && imgUrl != null)
                 imgUrl = imgUrl2
             else imgUrl = imgUrl1

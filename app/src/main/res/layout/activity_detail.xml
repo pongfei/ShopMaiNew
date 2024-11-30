@@ -110,4 +110,16 @@
         app:layout_constraintTop_toBottomOf="@+id/titleInfo"
         app:srcCompat="@drawable/back_icon" />
 
+    <ImageView
+        android:id="@+id/backImgBtn2"
+        android:layout_width="65dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="70dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imgInfo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imgInfo"
+        app:layout_constraintTop_toBottomOf="@+id/titleInfo"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/back_icon1" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
