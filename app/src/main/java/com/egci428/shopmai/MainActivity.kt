@@ -34,29 +34,6 @@ class MainActivity : AppCompatActivity() {
         readFirestoreData()
     }
 
-//    private fun readFirestoreData() {
-//        val db = dataReference.collection("menu")
-//        db.orderBy("id").get()
-//            .addOnSuccessListener { snapshot ->
-//                if (snapshot != null) {
-//                    msgList.clear()
-//                    val messages = snapshot.toObjects(Menu::class.java)
-//                    msgList.addAll(messages)
-//
-//                    // Set up adapter
-//                    adapter = MenuAdapter(this, R.layout.row, msgList)
-//                    listView.adapter = adapter
-//                }
-//            }
-//            .addOnFailureListener {
-//                Toast.makeText(
-//                    applicationContext,
-//                    "Failed to read message from Firestore!",
-//                    Toast.LENGTH_SHORT
-//                ).show()
-//            }
-//    }
-
     private fun readFirestoreData() {
         val db = dataReference.collection("menu")
         db.orderBy("id").get()
@@ -127,5 +104,6 @@ class MainActivity : AppCompatActivity() {
         val customAlertDialog = alertDialog.create()
         customAlertDialog.show()
     }
+
 
 }

@@ -5,6 +5,6 @@ data class Menu(
     val title: String = "",
     val img1: String = "",
     val img2: String = "",
-    val price: Float = 0.0f,
+    val price: Float = 0.00f,
     val description: String = ""
 )

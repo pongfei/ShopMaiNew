@@ -36,6 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="200dp"
         android:layout_marginTop="8dp"
+        android:background="#00FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titleInfo"
@@ -91,5 +92,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/orderBtn" />
+
+    <ImageView
+        android:id="@+id/backBtn"
+        android:layout_width="65dp"
+        android:layout_height="0dp"
+        android:onClick="back"
+        app:layout_constraintBottom_toBottomOf="@+id/titleInfo"
+        app:layout_constraintTop_toTopOf="@+id/titleInfo"
+        app:srcCompat="@drawable/back_icon" />
+
+    <ImageView
+        android:id="@+id/backImgBtn"
+        android:layout_width="65dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imgInfo"
+        app:layout_constraintTop_toBottomOf="@+id/titleInfo"
+        app:srcCompat="@drawable/back_icon" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

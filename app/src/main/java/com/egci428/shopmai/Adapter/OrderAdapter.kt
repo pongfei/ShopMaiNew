@@ -15,7 +15,7 @@ class OrderAdapter(
     private val orderObject: ArrayList<Order>,
     private val listener: OnItemClickListener,
     private val sensorManager: SensorManager,
-    private var total: Int = 0
+    private var total: Float = 0.0f
 ) : RecyclerView.Adapter<OrderAdapter.OrderViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrderViewHolder {
@@ -29,7 +29,7 @@ class OrderAdapter(
         val order = orderObject[position]
         holder.txtTitle.text = order.title
         holder.txtPrice.text = "฿ "+ order.price.toString()
-        total+= order.price.toInt()
+        total+= order.price
         (holder.itemView.context as OrderActivity).totalText.text = "Total: ฿ $total"
 
         // Resolve image resource

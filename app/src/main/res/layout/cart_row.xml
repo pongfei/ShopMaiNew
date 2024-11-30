@@ -19,7 +19,7 @@
             android:id="@+id/imgView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/black"
+            android:background="#00000000"
             android:src="@drawable/cinnamon_roll_2" />
 
         <!-- Label TextView slightly off-center inside the ImageView -->
@@ -50,7 +50,7 @@
             android:gravity="right"
             android:paddingEnd="16dp"
             android:text="Price"
-            android:textColor="#FFB6C1"
+            android:textColor="#673AB7"
             android:textSize="14sp" />
 
     </LinearLayout>
