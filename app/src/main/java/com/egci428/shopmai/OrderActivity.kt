@@ -53,7 +53,7 @@ class OrderActivity :  AppCompatActivity(), OrderAdapter.OnItemClickListener, Se
 
         adapter = OrderAdapter(orderList, this, sensorManager!!)
         recyclerView.adapter = adapter
-        
+
         val homeBtn = findViewById<Button>(R.id.homeBtn)
         val checkBtn = findViewById<Button>(R.id.checkBtn)
         totalText = findViewById(R.id.totalTextView)
@@ -73,12 +73,13 @@ class OrderActivity :  AppCompatActivity(), OrderAdapter.OnItemClickListener, Se
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
-//        checkBtn.setOnClickListener() {
-//            Toast.makeText(this, "Order submitted!", Toast.LENGTH_SHORT).show()
-//            val intent = Intent(this, ReviewActivity::class.java)
-//            startActivity(intent)
-//            finish()
-//        }
+        checkBtn.setOnClickListener() {
+            Toast.makeText(this, "Order submitted!", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, ReviewActivity::class.java)
+            intent.putExtra("itemname", orderList.get(0).title)
+            startActivity(intent)
+            finish()
+        }
     }
 
     override fun onSensorChanged(event: SensorEvent) {
