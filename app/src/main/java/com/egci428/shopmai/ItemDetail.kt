@@ -95,8 +95,7 @@ class ItemDetail : AppCompatActivity() {
     }
 
     fun back(){
-        intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
+        finish()
     }
 
     private fun save(line: String) {

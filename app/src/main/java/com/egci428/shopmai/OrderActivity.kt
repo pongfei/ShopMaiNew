@@ -65,6 +65,10 @@ class OrderActivity :  AppCompatActivity(), OrderAdapter.OnItemClickListener, Se
             startActivity(intent)
         }
         checkBtn.setOnClickListener() {
+            if (orderList.isEmpty()) {
+                Toast.makeText(this, "Cart is empty!", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
             Toast.makeText(this, "Order submitted!", Toast.LENGTH_SHORT).show()
             emptyCart()
             val intent = Intent(this, ReviewActivity::class.java)

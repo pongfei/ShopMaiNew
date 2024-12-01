@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:paddingBottom="8dp"
         android:text="Date"
-        android:textColor="@android:color/darker_gray"
+        android:textColor="#894e3f"
         android:textSize="12sp" />
 
     <!-- Review Text -->

@@ -52,7 +52,7 @@
             android:gravity="start"
             android:paddingEnd="16dp"
             android:text="Price"
-            android:textColor="#673AB7"
+            android:textColor="#894e3f"
             android:textSize="20sp" />
 
     </LinearLayout>

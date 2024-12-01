@@ -5,7 +5,6 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFF5F8"
     tools:context=".MainActivity">
 
     <EditText
@@ -16,6 +15,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
+        android:hint="Search"
         android:inputType="text"
         app:layout_constraintEnd_toStartOf="@+id/sortBtn"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,7 +27,7 @@
         android:layout_height="40dp"
         android:backgroundTint="#00FFFFFF"
         android:onClick="search"
-        android:tint="#000000"
+        android:tint="	#894e3f"
         app:layout_constraintBottom_toBottomOf="@+id/searchEditText"
         app:layout_constraintEnd_toEndOf="@+id/searchEditText"
         app:layout_constraintTop_toTopOf="@+id/searchEditText"
@@ -39,6 +39,7 @@
         android:layout_height="40dp"
         android:layout_marginEnd="16dp"
         android:onClick="sort"
+        android:tint="	#894e3f"
         app:layout_constraintBottom_toBottomOf="@+id/searchEditText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/searchEditText"
@@ -64,7 +65,7 @@
         android:layout_height="60dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:background="#673AB7"
+        android:background="#9c634f"
         android:onClick="toCart"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
