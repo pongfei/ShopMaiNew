@@ -53,7 +53,7 @@ class MenuAdapter(
             intent.putExtra("titleTextView", titleTextView.text.toString())
             intent.putExtra("img1TextView", menu.img1)
             intent.putExtra("img2TextView", menu.img2)
-            intent.putExtra("priceTextView", menu.price.toString())
+            intent.putExtra("priceTextView", menu.price)
             intent.putExtra("descriptionTextView", menu.description)
 
             mContext.startActivity(intent) //use mContext when in adapter class

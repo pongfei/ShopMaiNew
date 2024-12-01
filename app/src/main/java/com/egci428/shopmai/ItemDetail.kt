@@ -50,7 +50,7 @@ class ItemDetail : AppCompatActivity() {
         val bundle = intent.extras
         if (bundle != null) {
             title.text = bundle.getString("titleTextView")
-            price.text = "Price: ฿" + bundle.getString("priceTextView")
+            price.text = "Price: ฿" + bundle.getFloat("priceTextView").toString()
             desc.text = bundle.getString("descriptionTextView")
             imgUrl1 = bundle.getString("img1TextView")
             imgUrl2 = bundle.getString("img2TextView")
