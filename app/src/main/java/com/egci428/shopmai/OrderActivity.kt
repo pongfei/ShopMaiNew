@@ -36,6 +36,8 @@ class OrderActivity :  AppCompatActivity(), OrderAdapter.OnItemClickListener, Se
 
     lateinit var totalText: TextView
 
+    private var locationClick: Boolean = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -56,6 +58,7 @@ class OrderActivity :  AppCompatActivity(), OrderAdapter.OnItemClickListener, Se
 
         val homeBtn = findViewById<Button>(R.id.homeBtn)
         val checkBtn = findViewById<Button>(R.id.checkBtn)
+        val locationBtn = findViewById<Button>(R.id.locationBtn)
         totalText = findViewById(R.id.totalTextView)
 
         read()
@@ -65,18 +68,30 @@ class OrderActivity :  AppCompatActivity(), OrderAdapter.OnItemClickListener, Se
             startActivity(intent)
         }
         checkBtn.setOnClickListener() {
-            if (orderList.isEmpty()) {
-                Toast.makeText(this, "Cart is empty!", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
+            if (locationClick) {
+                if (orderList.isEmpty()) {
+                    Toast.makeText(this, "Cart is empty!", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+                Toast.makeText(this, "Order submitted!", Toast.LENGTH_SHORT).show()
+                emptyCart()
+                val intent = Intent(this, ReviewActivity::class.java)
+                intent.putExtra("itemname", orderList.get(0).title)
+                intent.putExtra("id", orderList.get(0).id)
+                startActivity(intent)
+                finish()
             }
-            Toast.makeText(this, "Order submitted!", Toast.LENGTH_SHORT).show()
-            emptyCart()
-            val intent = Intent(this, ReviewActivity::class.java)
-            intent.putExtra("itemname", orderList.get(0).title)
-            intent.putExtra("id",orderList.get(0).id)
-            startActivity(intent)
-            finish()
+            else{
+                Toast.makeText(this, "Selected Delivery Location First!", Toast.LENGTH_SHORT).show()
+            }
         }
+
+        locationBtn.setOnClickListener{
+            val intent = Intent(this, MapsActivity::class.java)
+            startActivity(intent)
+            locationClick = true
+        }
+
     }
 
     override fun onSensorChanged(event: SensorEvent) {
