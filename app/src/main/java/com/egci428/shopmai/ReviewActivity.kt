@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.RatingBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -29,7 +30,7 @@ class ReviewActivity : AppCompatActivity() {
     lateinit var commentEditText: EditText
     lateinit var submitBtn: Button
     lateinit var imgBtn: Button
-    lateinit var ratingEditText: EditText
+    lateinit var ratingBar: RatingBar
 
     lateinit var dataReference: FirebaseFirestore
 
@@ -53,13 +54,13 @@ class ReviewActivity : AppCompatActivity() {
         commentEditText = findViewById(R.id.commentEditText)
         submitBtn = findViewById(R.id.submitBtn)
         imgBtn = findViewById(R.id.imgBtn)
-        ratingEditText = findViewById(R.id.starEditText)
+        ratingBar = findViewById(R.id.ratingBar2)
         itemName.text = intent.getStringExtra("itemname")
 
         submitBtn.setOnClickListener {
             val user = nameEditText.text.toString()
             val review = commentEditText.text.toString()
-            val rating = ratingEditText.text.toString().toInt()
+            val rating = ratingBar.rating.toInt()
             val img = reviewImage.toString()
             val item = itemName.text.toString()
             val id = intent.getIntExtra("id",0)
