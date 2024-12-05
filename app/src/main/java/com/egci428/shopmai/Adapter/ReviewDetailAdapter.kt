@@ -23,7 +23,6 @@ class ReviewDetailAdapter (
 
 
         // Bind views
-
         val user = view.findViewById<TextView>(R.id.reviewUser)
         val date = view.findViewById<TextView>(R.id.reviewDate)
         val text = view.findViewById<TextView>(R.id.reviewText)

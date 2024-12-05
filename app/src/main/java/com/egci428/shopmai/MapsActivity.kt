@@ -53,6 +53,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
+    //send delivery location to database (firestore)
     private fun sendLocation(latLon: LatLng) {
         val db = dataReference.collection("location")
         db.add(mapOf(
@@ -85,18 +86,20 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(shopMai, 15f))
 
 
+        //to remove any previous marker and polyline
         mMap.setOnMapClickListener { latlon ->
             currentMarker?.remove()
             currentPolyline?.remove()
 
+            //move the camera to the selected location
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latlon, 15f))
             currentMarker = mMap.addMarker(
                 MarkerOptions()
                     .position(latlon)
                     .title("Delivery Location: lat: ${latlon.latitude}, lon: ${latlon.longitude}")
-//                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.delivery))
                     .icon(BitmapDescriptorFactory.fromBitmap(scaledBitmap))
             )
+            //to draw a line from shopmai to the selected location
             currentPolyline = mMap.addPolyline(
                 PolylineOptions()
                     .add(shopMai, latlon)

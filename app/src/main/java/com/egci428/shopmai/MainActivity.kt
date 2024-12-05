@@ -34,6 +34,7 @@ class MainActivity : AppCompatActivity() {
         readFirestoreData()
     }
 
+    //read from menu collection in firestore
     private fun readFirestoreData() {
         val db = dataReference.collection("menu")
         db.orderBy("id").get()
@@ -58,13 +59,14 @@ class MainActivity : AppCompatActivity() {
             }
     }
 
-    // (view:View) is used when interacting with UI components without binding
+    // NOTE: (view:View) is used when interacting with UI components without binding
     fun toCart(view: View) {
         Toast.makeText(this, "to cart!", Toast.LENGTH_SHORT).show()
         intent = Intent(this, OrderActivity::class.java)
         startActivity(intent)
     }
 
+    //search function to find the item
     fun search(view: View) {
         //.trim() ignores the spaces/tab
         val query = searchEditText.text.toString().trim()
@@ -82,6 +84,7 @@ class MainActivity : AppCompatActivity() {
         listView.adapter = adapter
     }
 
+    //sort function based on price (low to high & high to low)
     fun sort(view: View) {
         val checkedItem = intArrayOf(-1)
         val alertDialog = AlertDialog.Builder(this)
@@ -96,7 +99,6 @@ class MainActivity : AppCompatActivity() {
                 1 -> currentList.sortBy { it.price }
             }
 
-            // Notify adapter of changes
             adapter.notifyDataSetChanged()
             dialog.dismiss()
         }

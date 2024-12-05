@@ -63,10 +63,13 @@ class OrderActivity :  AppCompatActivity(), OrderAdapter.OnItemClickListener, Se
 
         read()
 
+        //go back to home button
         homeBtn.setOnClickListener() {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
+
+        //check if cart is empty or not
         checkBtn.setOnClickListener() {
             if (locationClick) {
                 if (orderList.isEmpty()) {
@@ -147,6 +150,7 @@ class OrderActivity :  AppCompatActivity(), OrderAdapter.OnItemClickListener, Se
         }
     }
 
+    //read from the file
     private fun read() {
         try {
             val fIn = openFileInput(file)
@@ -170,6 +174,7 @@ class OrderActivity :  AppCompatActivity(), OrderAdapter.OnItemClickListener, Se
         }
     }
 
+
     private fun update() {
         try {
             // Overwrite file with updated orderList
@@ -190,6 +195,7 @@ class OrderActivity :  AppCompatActivity(), OrderAdapter.OnItemClickListener, Se
         }
     }
 
+    //remove the order if clicked on the order
     override fun onItemClick(position: Int) {
         val viewHolder = recyclerView.findViewHolderForAdapterPosition(position)
         viewHolder?.itemView?.animate()?.alpha(0F)?.setDuration(300)?.withEndAction {

@@ -29,7 +29,6 @@ class OrderAdapter(
         val order = orderObject[position]
         holder.txtTitle.text = order.title
         holder.txtPrice.text = "฿ "+ order.price.toString()
-//        holder.txtPrice.text = "฿ ${ order.price}"
         total+= order.price
 
         (holder.itemView.context as OrderActivity).totalText.text = "Total: ฿ $total"

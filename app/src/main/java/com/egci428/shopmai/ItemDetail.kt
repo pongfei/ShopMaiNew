@@ -77,12 +77,13 @@ class ItemDetail : AppCompatActivity() {
             val Title = title.text.toString()
             val Img1 = imgUrl1.toString()
             val Price = intent.getFloatExtra("priceTextView",0f)
-//            val Price = intent.getFloatExtra("price",0F)
             val line = "{\"id\": $id, \"title\": \"$Title\", \"price\": $Price, \"img1\": \"$Img1\"}"
             save(line)
             finish()
         }
     }
+
+    //to show image
     private fun showImg() {
         val context = imgInfo.context
         val resId = imgUrl?.let { context.resources.getIdentifier(it, "drawable", context.packageName) } ?: 0
@@ -98,6 +99,7 @@ class ItemDetail : AppCompatActivity() {
         finish()
     }
 
+    //asve into .txt file
     private fun save(line: String) {
         try {
             val fOut = openFileOutput(file, Context.MODE_APPEND)
@@ -113,6 +115,7 @@ class ItemDetail : AppCompatActivity() {
         }
     }
 
+    //read from firestore to show review
     private fun readFirestoreData() {
 
         val titleTextView = findViewById<TextView>(R.id.titleInfo)
@@ -145,6 +148,7 @@ class ItemDetail : AppCompatActivity() {
                 ).show()
             }
     }
+    //send to cart page
     fun toCart(view: View) {
         Toast.makeText(this, "to cart!", Toast.LENGTH_SHORT).show()
         intent = Intent(this, OrderActivity::class.java)

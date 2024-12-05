@@ -27,8 +27,6 @@ class MenuAdapter(
 
         // Bind views
         val titleTextView = view.findViewById<TextView>(R.id.messageTitle)
-//        val img1TextView = view.findViewById<TextView>(R.id.messageImg1)
-//        val img2TextView = view.findViewById<TextView>(R.id.messageImg2)
         val priceTextView = view.findViewById<TextView>(R.id.messagePrice)
         val orderBtn = view.findViewById<ImageView>(R.id.orderBtn)
         val imgView = view.findViewById<ImageView>(R.id.imgView)

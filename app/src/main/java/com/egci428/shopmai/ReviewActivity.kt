@@ -68,6 +68,8 @@ class ReviewActivity : AppCompatActivity() {
             submitData(id, item,user,img,rating,review)
         }
     }
+
+    //submit the order data to firestore
     private fun submitData(id: Int, item: String, user: String, img: String, rating:Int, review: String) {
         val db = dataReference.collection("review")
         val date = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(System.currentTimeMillis())
@@ -83,6 +85,7 @@ class ReviewActivity : AppCompatActivity() {
         Log.d("test add", reviewData.toString())
         finish()
     }
+
 
     fun takePhoto(view: View) {
         requestCameraPermission.launch(android.Manifest.permission.CAMERA)
@@ -113,6 +116,7 @@ class ReviewActivity : AppCompatActivity() {
             }
         }
     }
+
 
     private fun getTempFileUri(): Uri {
         outputDirectory = getOutputDirectory(this)
